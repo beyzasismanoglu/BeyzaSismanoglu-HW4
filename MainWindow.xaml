@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <StackPanel Margin="10">
-        <Label Content="Student Number" Name="lblStudentId"/>
-        <TextBox Text="Name" TextWrapping="Wrap" x:Name="txtStudentName" />
-        <TextBox Text="Surname" TextWrapping="Wrap" Name="txtStudentSurname" />
+        <Label Content="" Name="lblStudentId"/>
+        <TextBox Text="" TextWrapping="Wrap" Name="txtStudentName" />
+        <TextBox Text="" TextWrapping="Wrap" Name="txtStudentSurname" />
         <DatePicker Name="dtpBirthDate"/>
         <Button Content="Insert" Name="btnSave" Click="Button_Click"/>
         <Button Content="Update" Name="btnUpdate" Click="btnUpdate_Click"></Button>

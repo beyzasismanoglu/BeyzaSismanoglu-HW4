@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace CetStudents
 {
@@ -21,22 +22,42 @@ namespace CetStudents
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void btnOpenStudents_Click(object sender, RoutedEventArgs e)
         {
-            Courses course = new Courses();
-            course.Credit = txtCredit.Text;
-            course.Quota = txtQuota.Text;
+            MainWindow student = new MainWindow();
+            student.Show();
+        }
 
-            CetDb1 db1 = new CetDb1();
-            db1.Course.Add(course);
+        private void dgCourses_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            Course course = dgCourses.SelectedItem as Course;
+            if (course != null)
+            {
+                lblCourseId.Content = course.Id;
+                txtCourseCode.Text = course.Code;
+                txtCourseCredit.Text = course.Credit.ToString();
+                txtCourseQuota.Text = course.Quota.ToString();
+            }
+        }
 
-            db1.SaveChanges();
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Course course = new Course();
+            course.Code = txtCourseCode.Text;
+            course.Credit = Int32.Parse(txtCourseCredit.Text);
+            course.Quota = Int32.Parse(txtCourseQuota.Text);
+
+            CetDb db = new CetDb();
+            db.Courses.Add(course);
+
+            db.SaveChanges();
             MessageBox.Show("Ders Kaydedildi.");
             lblCourseId.Content = "";
-            txtCode.Text = "";
-            txtCredit.Text = "";
-            txtQuota.Text = "";
-
+            txtCourseCode.Text = "";
+            txtCourseCredit.Text = "";
+            txtCourseQuota.Text = "";
+           
             LoadCourses();
         }
 
@@ -47,25 +68,48 @@ namespace CetStudents
 
         private void LoadCourses()
         {
-            CetDb1 db1 = new CetDb1();
-            List<Course> course = db1.Course.ToList();
-            dgCourse.ItemsSource = course;
+            CetDb db = new CetDb();
+            List<Course> course = db.Courses.ToList();  
+            dgCourses.ItemsSource = course;
         }
 
-        private void dgCourse_Selected(object sender, RoutedEventArgs e)
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            Course course = dgCourses.SelectedItem as Course;
+            if (course != null)
+            {
+                CetDb db = new CetDb();
+                var coursenew = db.Courses.Find(course.Id);
+                coursenew.Code = txtCourseCode.Text;
+                coursenew.Credit = Int32.Parse(txtCourseCredit.Text);
+                coursenew.Quota = Int32.Parse(txtCourseQuota.Text);
 
+                db.SaveChanges();
+                LoadCourses();
+                MessageBox.Show("Güncellendi.");
+            }
+            else
+            {
+                MessageBox.Show("güncellemek için dersi seçmelisin!");
+            }
         }
 
-
-        private void btnOpenStudents_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            Course course = dgCourses.SelectedItem as Course;
+            if (course != null)
+            {
+                CetDb db = new CetDb();
+                db.Courses.Remove(course);
+                db.SaveChanges();
+                MessageBox.Show("Ders Silindi!");
+                LoadCourses();
 
-        }
-
-        private void dgCourses_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-
+            }
+            else
+            {
+                MessageBox.Show("Silmek için ders seçmelisin!");
+            }
         }
     }
 }

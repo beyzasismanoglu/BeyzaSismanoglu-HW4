@@ -52,7 +52,7 @@ namespace CetStudents
         private void LoadStudents()
         {
             CetDb db = new CetDb();
-            List<Student> students = db.Students.ToList();
+            List<Student> students = db.Students.ToList();  //tüm öğrencilerin hepsini görüyorum
             dgStudents.ItemsSource = students;
         }
 

@@ -7,17 +7,18 @@
         mc:Ignorable="d"
         Title="CourseWindow" Height="450" Width="800">
     <StackPanel Margin="10">
-        <Label Content="Course" Name="lblCourseId"/>
-        <TextBox Text="Course Code" TextWrapping="Wrap" x:Name="txtCode" />
-        <TextBox Text="Quota" TextWrapping="Wrap" x:Name="txtQuota" />
-        <TextBox Text="Credit" TextWrapping="Wrap" Name="txtCredit" />
-       
-        <Button Content="Insert" Name="btnSave" Click="Button_Click"/>
+        <Label Content="" Name="lblCourseId"/>
+        <TextBox Text="Code" TextWrapping="Wrap" Name="txtCourseCode" />
+        <TextBox Text="Quota" TextWrapping="Wrap" Name="txtCourseQuota" />
+        <TextBox Text="Credit" TextWrapping="Wrap" Name="txtCourseCredit" />
+
+        
+        <Button Content="Insert" Name="btnSave" Click="btnSave_Click"/>
         <Button Content="Update" Name="btnUpdate" Click="btnUpdate_Click"></Button>
         <Button Content="Delete" Name="btnDelete" Click="btnDelete_Click"></Button>
         <Button Name="btnOpenStudents" Content="Open Student Page" Click="btnOpenStudents_Click" />
+        
         <DataGrid Name="dgCourses" Height="311" SelectedCellsChanged="dgCourses_SelectedCellsChanged"/>
-
 
 
     </StackPanel>

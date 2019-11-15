@@ -7,8 +7,9 @@ namespace CetStudents
 {
     public class CetDb : DbContext
     {
-        string connectionString = @"Server=DESKTOP-K2VACC0\SQLEXPRESS;Database=CetDb;Trusted_Connection=True;";
+        string connectionString = @"Server=.\sqlexpress;Database=CetDb;Trusted_Connection=True;";
         public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public CetDb():base()
         {
 

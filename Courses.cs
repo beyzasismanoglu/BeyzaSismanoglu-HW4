@@ -4,10 +4,12 @@ using System.Text;
 
 namespace CetStudents
 {
-    class Courses
+    public class Course
     {
-        public int CourseID { get; set; }
-        public string Credit  { get; set; }
-        public string Quota { get; set; }
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public int Credit { get; set; }
+        public int Quota { get; set; }
+        
     }
 }
